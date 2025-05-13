@@ -8,19 +8,21 @@
       <link href="/2025/05/12/windows%E5%AE%89%E8%A3%85postgresql9.6/"/>
       <url>/2025/05/12/windows%E5%AE%89%E8%A3%85postgresql9.6/</url>
       
-        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="解压安装"><a href="#解压安装" class="headerlink" title="解压安装"></a>解压安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="解压安装"><a href="#解压安装" class="headerlink" title="解压安装"></a>解压安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解压后放到安装目录，重命名为pgsql，下面以D:\pgsql为例</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在D:\pgsql下创建data目录</span></span><br></pre></td></tr></table></figure><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">打开cmd管理员模式，进入D:\pgsql、cmd默认打开可能是C盘，可以直接输入D:切换到D盘</span></span><br><span class="line">cd D:\pgsql</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">初始化数据，会提示设置postgres用户密码</span></span><br><span class="line">.\bin\initdb -D data -U postgres -A password -E utf-8 --locale=C -W</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动数据库，启动成功后可以通过可视化工具连接测试</span></span><br><span class="line">pg_ctl -D data start</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果测试不成功，可以排查是否正常启动，比如是否正在监听端口</span></span><br><span class="line">netstat -aon | findstr &quot;5432&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如端口正在监听还是无法访问成功，可能需要关闭防火墙或者开放端口，方法可网上查询</span></span><br></pre></td></tr></table></figure><h2 id="注册为系统服务"><a href="#注册为系统服务" class="headerlink" title="注册为系统服务"></a>注册为系统服务</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入目录</span></span><br><span class="line">cd D:\pgsql</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">注册为系统服务</span></span><br><span class="line">.\bin\pg_ctl register -N pgsql9.6 -D data</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动服务</span></span><br><span class="line">net start pgsql9.6</span><br></pre></td></tr></table></figure>]]></content>
       
       
       <categories>
           
-          <category> 软件安装 </category>
+          <category> 服务安装和配置 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> windows postgres </tag>
+            <tag> windows </tag>
+            
+            <tag> postgres </tag>
             
         </tags>
       
